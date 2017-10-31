@@ -1,0 +1,73 @@
+div:
+  type: div
+  attribute:
+    idzzz: div_upload_form
+    id: _
+  innerHTML:
+    form:
+      type: form
+      attribute:
+        enctype: 'multipart/form-data'
+        method: post
+      innerHTML:
+        input_file:
+          type: input
+          attribute:
+            type: file
+            idzzz: div_upload_form_file
+            id: _
+            accept: _
+            onchange: "alert('set_in_action');"
+            style: 'display:none'
+        input_button:
+          type: input
+          attribute:
+            type: button
+            class: upload_button
+            value: Upload file
+            onclick: "alert('set_in_action');"
+            disabled: disabled
+            style: 'display:none'
+    btn_select:
+      type: p
+      innerHTML:
+        a:
+          type: a
+          attribute:
+            data_idzzz: div_upload_form
+            data_id: _
+            onclick: "$('#'+this.getAttribute('data_id')+'_file').trigger('click'); "
+            class: btn btn-default status
+          innerHTML: Select file
+#    p_status:
+#      type: p
+#      attribute:
+#        classzzz: status
+#      innerHTML: _
+    p_total:
+      type: p
+      attribute:
+        class: total
+        style: 'font-size:smaller'
+      innerHTML: _
+    progress:
+      type: progress
+      attribute:
+        value: 0
+        max: 100
+        style: 'width:100%;display:none;'
+script:
+  type: script
+  attribute:
+    id: script
+  innerHTML: "alert('_');"
+  
+    
+
+
+
+
+
+
+
+
