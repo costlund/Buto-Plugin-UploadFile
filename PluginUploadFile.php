@@ -43,7 +43,7 @@ class PluginUploadFile{
       /**
        * 
        */
-      $fullname = $data->get('web_dir').'/'.$data->get('name').'?x='.wfCrypt::getUid();
+      $fullname = wfSettings::replaceDir($data->get('web_dir')).'/'.$data->get('name').'?x='.wfCrypt::getUid();
       $element = array();
       /**
        * Buttons.
