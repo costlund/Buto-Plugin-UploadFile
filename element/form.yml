@@ -1,7 +1,6 @@
 div:
   type: div
   attribute:
-    idzzz: div_upload_form
     id: _
   innerHTML:
     form:
@@ -14,7 +13,6 @@ div:
           type: input
           attribute:
             type: file
-            idzzz: div_upload_form_file
             id: _
             accept: _
             onchange: "alert('set_in_action');"
@@ -34,23 +32,43 @@ div:
         a:
           type: a
           attribute:
-            data_idzzz: div_upload_form
             data_id: _
             onclick: "$('#'+this.getAttribute('data_id')+'_file').trigger('click'); "
             class: btn btn-default status
             id: btn_upload
-          innerHTML: Select filezzz
-#    p_status:
-#      type: p
-#      attribute:
-#        classzzz: status
-#      innerHTML: _
+          innerHTML: _Select file_
     p_total:
+#      _: This could be removed along with Javascript (180613)?
       type: p
       attribute:
         class: total
-        style: 'font-size:smaller'
+        style: 'font-size:smaller;display:none'
       innerHTML: _
+    alert:
+      type: div
+      innerHTML:
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              innerHTML: 'Max file size:'
+            -
+              type: span
+              attribute:
+                id: max_file_size
+              innerHTML: _
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              innerHTML: 'Accept:'
+            -
+              type: span
+              attribute:
+                id: accept
+              innerHTML: _
     progress:
       type: progress
       attribute:
@@ -62,13 +80,3 @@ script:
   attribute:
     id: script
   innerHTML: "alert('_');"
-  
-    
-
-
-
-
-
-
-
-
