@@ -20,6 +20,38 @@ class PluginUploadFile{
     wfDocument::renderElement($element);
   }
   /**
+   * Use this widget to only view or access file outside the upload procedure.
+   */
+  public function widget_view($data){
+    $data = new PluginWfArray($data);
+    $data = new PluginWfArray($data->get('data'));
+    /**
+     * 
+     */
+    $fullname = wfSettings::replaceDir($data->get('dir').'/'.$data->get('name'));
+    $element = array();
+    if(wfFilesystem::fileExist($fullname)){
+      /**
+       * 
+       */
+      $fullname = wfSettings::replaceDir($data->get('web_dir')).'/'.$data->get('name').'?x='.wfCrypt::getUid();
+      /**
+       * Display element.
+       */
+      $element2 = array();
+      if($this->isExtension(array('png', 'jpg', 'gif'), $data->get('name'))){
+        $element2[] = wfDocument::createHtmlElement('img', null, array('src' => $fullname, 'class' => 'img-thumbnail', 'style' => 'width:100%'));
+      }else if($this->isExtension(array('pdf', 'yml', 'txt'), $data->get('name'))){
+        $element2[] = wfDocument::createHtmlElement('a', $data->get('name'), array('onclick' => "window.open('$fullname')"));
+      }
+      $element[] = wfDocument::createHtmlElement('p', $element2);
+    }
+    /**
+     * Render.
+     */
+    wfDocument::renderElement($element);
+  }
+  /**
    * 
    */
   public function widget_element($data){
