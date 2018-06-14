@@ -123,7 +123,7 @@ class PluginUploadFile{
       $form->set('div/attribute/id', $id);
       $form->set('div/innerHTML/form/innerHTML/input_file/attribute/id', $id.'_file');
       $form->set('div/innerHTML/btn_select/innerHTML/a/attribute/data_id', $id);
-      $form->setById('script', 'innerHTML', "plugin_upload_file.$id = new PluginUploadFile(); plugin_upload_file.$id.setData(".json_encode($data->get()).");");
+      $form->setById('script', 'innerHTML', "if(typeof PluginUploadFile=='undefined'){console.log('Include widget for upload/file is missing.');};plugin_upload_file.$id = new PluginUploadFile(); plugin_upload_file.$id.setData(".json_encode($data->get()).");");
       $form->setById('max_file_size', 'innerHTML', ($data->get('max_size')/1000000).' mb');
       $form->setById('accept', 'innerHTML', $data->get('accept'));
       wfDocument::renderElement($form->get());
