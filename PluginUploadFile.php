@@ -3,6 +3,7 @@
  * 
  * Improvements.
  * 180128: Add param success/before_save to run method before save image.
+ * Windows: Has to add account IUSR to temp folder with proper privileges.
  */
 class PluginUploadFile{
   /**
