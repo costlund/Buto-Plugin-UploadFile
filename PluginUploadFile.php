@@ -183,11 +183,6 @@ class PluginUploadFile{
        * Accept.
        */
       $accept = false;
-//      foreach ($data->get('accept') as $key => $value){
-//        if( strtolower(substr($fileName, (strlen($fileName)-strlen($value)-1)))  == strtolower('.'.$value) ){
-//          $accept = true;
-//        }
-//      }
       if( strtolower(substr($fileName, (strlen($fileName)-strlen($data->get('accept'))-1)))  == strtolower('.'.$data->get('accept')) ){
         $accept = true;
       }
@@ -209,15 +204,28 @@ class PluginUploadFile{
         exit(json_encode($array));
       }
       /**
-       * Copy from temp folder.
-       */
-      /**
        * Run method before save.
+       * Set $form->set('error/text', 'Some error message...') will stop saving file.
        */
       if($data->get('success/before_save/plugin') && $data->get('success/before_save/method')){
         $data = PluginUploadFile::runCaptureMethod($data->get('success/before_save/plugin'), $data->get('success/before_save/method'), $data);
       }
+      /**
+       * If error is set in before_save method.
+       */
+      if($data->get('error')){
+        exit(json_encode($data->get('error')));
+      }
+      /**
+       * Copy from temp folder.
+       */
       if(move_uploaded_file($fileTmpLoc, $target_dir)){
+        /**
+         * Run method before save.
+         */
+        if($data->get('success/after_save/plugin') && $data->get('success/after_save/method')){
+          $data = PluginUploadFile::runCaptureMethod($data->get('success/after_save/plugin'), $data->get('success/after_save/method'), $data);
+        }
         /**
          * 
          */
