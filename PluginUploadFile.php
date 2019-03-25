@@ -43,13 +43,11 @@ class PluginUploadFile{
       /**
        * Display element.
        */
-      $element2 = array();
       if($this->isExtension(array('png', 'jpg', 'gif'), $data->get('name'))){
-        $element2[] = wfDocument::createHtmlElement('img', null, array('src' => $fullname, 'class' => 'img-thumbnail', 'style' => 'width:100%'));
+        $element[] = wfDocument::createHtmlElement('img', null, array('src' => $fullname, 'class' => 'img-thumbnail', 'style' => 'width:100%'));
       }else if($this->isExtension(array('pdf', 'yml', 'txt'), $data->get('name'))){
-        $element2[] = wfDocument::createHtmlElement('a', $data->get('name'), array('onclick' => "window.open('$fullname')"));
+        $element[] = wfDocument::createHtmlElement('a', $data->get('name'), array('onclick' => "window.open('$fullname')"));
       }
-      $element[] = wfDocument::createHtmlElement('p', $element2);
     }
     /**
      * Render.
