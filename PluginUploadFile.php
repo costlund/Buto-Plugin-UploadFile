@@ -30,6 +30,10 @@ class PluginUploadFile{
   public function widget_view($data){
     $data = new PluginWfArray($data);
     $data = new PluginWfArray($data->get('data'));
+    $img_style = 'width:100%';
+    if($data->get('img/style')){
+      $img_style = $data->get('img/style');
+    }
     /**
      * 
      */
@@ -44,7 +48,7 @@ class PluginUploadFile{
        * Display element.
        */
       if($this->isExtension(array('png', 'jpg', 'gif'), $data->get('name'))){
-        $element[] = wfDocument::createHtmlElement('img', null, array('src' => $fullname, 'class' => 'img-thumbnail', 'style' => 'width:100%'));
+        $element[] = wfDocument::createHtmlElement('img', null, array('src' => $fullname, 'class' => 'img-thumbnail', 'style' => $img_style));
       }else if($this->isExtension(array('pdf', 'yml', 'txt'), $data->get('name'))){
         $element[] = wfDocument::createHtmlElement('a', $data->get('name'), array('onclick' => "window.open('$fullname')"));
       }
