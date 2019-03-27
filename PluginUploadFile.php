@@ -52,6 +52,8 @@ class PluginUploadFile{
       }else if($this->isExtension(array('pdf', 'yml', 'txt'), $data->get('name'))){
         $element[] = wfDocument::createHtmlElement('a', $data->get('name'), array('onclick' => "window.open('$fullname')"));
       }
+    }elseif($data->get('image_not_exist')){
+      $element = $data->get('image_not_exist');
     }
     /**
      * Render.
