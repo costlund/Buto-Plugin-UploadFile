@@ -20,7 +20,8 @@ class PluginUploadFile{
    */
   public static function widget_include(){
     $element = array();
-    $element[] = wfDocument::createHtmlElement('script', null, array('src' => '/plugin/upload/file/plugin_upload_file.js'));
+    wfPlugin::enable('include/js');
+    $element[] = wfDocument::createWidget('include/js', 'include', array('src' => '/plugin/upload/file/plugin_upload_file.js'));    
     $element[] = wfDocument::createHtmlElement('script', "var plugin_upload_file = {};");
     wfDocument::renderElement($element);
   }
