@@ -34,7 +34,7 @@ div:
           attribute:
             data_id: _
             onclick: "$('#'+this.getAttribute('data_id')+'_file').trigger('click'); "
-            class: btn btn-default status
+            class: btn btn-primary status
             id: btn_upload
           innerHTML: _Select file_
     p_total:

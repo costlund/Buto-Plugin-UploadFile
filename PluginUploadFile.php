@@ -98,8 +98,8 @@ class PluginUploadFile{
        * Buttons.
        */
       $element2 = array();
-      $element2[] = wfDocument::createHtmlElement('button', 'Delete', array('onclick' => "PluginWfAjax.load('".$data->get('id')."_delete', '".$data->get('url')."');", 'id' => "".$data->get('id')."_delete", 'class' => 'btn btn-default'));
-      $element2[] = wfDocument::createHtmlElement('button', 'View', array('onclick' => "window.open('$fullname')", 'class' => 'btn btn-default'));
+      $element2[] = wfDocument::createHtmlElement('button', 'Delete', array('onclick' => "PluginWfAjax.load('".$data->get('id')."_delete', '".$data->get('url')."');", 'id' => "".$data->get('id')."_delete", 'class' => 'btn btn-primary'));
+      $element2[] = wfDocument::createHtmlElement('button', 'View', array('onclick' => "window.open('$fullname')", 'class' => 'btn btn-success'));
       $element[] = wfDocument::createHtmlElement('p', $element2);
       /**
        * Display element.
