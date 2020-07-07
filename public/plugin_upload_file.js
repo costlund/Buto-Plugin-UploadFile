@@ -1,4 +1,5 @@
 function PluginUploadFile(){
+  this.i18n = {'_': 'This is set from widget i18n/file_to_object, run.'};
   var max_size = null;
   var types = null;
   var type = null;
@@ -12,7 +13,7 @@ function PluginUploadFile(){
     type = data['file_type'];
     accept = data['accept'];
     $('#'+data.id+' progress')[0].style.display = "none";
-    $('#'+data.id+' .status')[0].innerHTML = "Select file";
+    $('#'+data.id+' .status')[0].innerHTML = PluginI18nJson_v1.i18n("Select file", PluginUploadFile.i18n);
     var str = "";
     str += "Upload of max "+(data.max_size/1000000)+" mb file size";
     if(data.file_type){
@@ -51,17 +52,17 @@ function PluginUploadFile(){
           eval(data.success.script);
         }
       }else if(json.success === '6'){
-        alert('Accept failure!');
+        alert(PluginI18nJson_v1.i18n("Accept failure!", PluginUploadFile.i18n));
         self.setData(data);
       }else{
         if(json.text){
           alert(json.text);
         }else{
-          alert('Error: '+e.target.responseText.trim()+'');
+          alert(PluginI18nJson_v1.i18n("Error", PluginUploadFile.i18n)+': '+e.target.responseText.trim()+'');
         }
       }
     }else{
-      alert('An error occured, status '+e.target.status+'.')          
+      alert(PluginI18nJson_v1.i18n("An error occured, status ?status", PluginUploadFile.i18n, [{'key': '?status', 'value': e.target.status}]));
     }
   }
   this.errorHandler = function(e){
@@ -75,9 +76,9 @@ function PluginUploadFile(){
     btn.disabled = true;
     var file = document.getElementById(''+data.id+'_file').files[0];
     if(file.size > max_size){
-      alert('This file is to large ('+file.size+').');
+      alert(PluginI18nJson_v1.i18n("This file is to large (?file_size)", PluginUploadFile.i18n, [{'key': '?file_size', 'value': file.size}]));
     }else if(type && type != file.type ){
-      alert('This file type is not valid ('+file.type+').');
+      alert(PluginI18nJson_v1.i18n("This file type is not valid (?file_type)", PluginUploadFile.i18n, [{'key': '?file_type', 'value': file.type}]));
     }else{
       btn.disabled = false;
     }

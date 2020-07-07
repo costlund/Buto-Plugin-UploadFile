@@ -1,4 +1,9 @@
 div:
+  settings:
+    globals:
+      -
+        path_to_key: 'settings/plugin/i18n/translate_v1/settings/path'
+        value: '/plugin/upload/file/i18n'
   type: div
   attribute:
     id: _

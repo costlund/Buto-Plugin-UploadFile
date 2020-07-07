@@ -14,6 +14,7 @@ class PluginUploadFile{
       wfPlugin::includeonce('wf/array');
       wfPlugin::includeonce('wf/yml');
     }
+    wfPlugin::enable('i18n/file_to_object');
   }
   /**
    * 
@@ -23,6 +24,7 @@ class PluginUploadFile{
     wfPlugin::enable('include/js');
     $element[] = wfDocument::createWidget('include/js', 'include', array('src' => '/plugin/upload/file/plugin_upload_file.js'));    
     $element[] = wfDocument::createHtmlElement('script', "var plugin_upload_file = {};");
+    $element[] = wfDocument::createWidget('i18n/file_to_object', 'run', array('item' => array(array('folder' => '/plugin/upload/file/i18n', 'object' => 'PluginUploadFile.i18n'))));    
     wfDocument::renderElement($element);
   }
   /**
