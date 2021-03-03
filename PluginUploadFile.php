@@ -153,9 +153,7 @@ class PluginUploadFile{
       $data->set('post/fileName', $fileName);
       $data->set('post/fileTmpLoc', $fileTmpLoc);
       $data->set('dir', wfSettings::replaceDir($data->get('dir')));
-      if(!wfFilesystem::fileExist($data->get('dir'))){
-        throw new Exception("Dir ".$data->get('dir')." does not exist! Can not put file in none existing folder.");
-      }
+      wfFilesystem::createDir(wfSettings::replaceDir($data->get('dir')));
       if($data->get('name')=='*'){
         $target_dir = $data->get('dir').'/'.$_FILES["file1"]["name"];
       }else{
