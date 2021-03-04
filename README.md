@@ -63,6 +63,11 @@ success:
   script: "alert('Success on upload.');"
 ```
 
+### Display name
+Add optional param to display instead of file name.
+```
+display_name: Test file
+```
 
 
 ## Usage

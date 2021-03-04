@@ -33,6 +33,16 @@ class PluginUploadFile{
   public function widget_view($data){
     $data = new PluginWfArray($data);
     $data = new PluginWfArray($data->get('data'));
+    /**
+     * 
+     */
+    $display_name = $data->get('name');
+    if($data->get('display_name')){
+      $display_name = $data->get('display_name');
+    }
+    /**
+     * 
+     */
     $img_style = 'width:100%';
     if($data->get('img/style')){
       $img_style = $data->get('img/style');
@@ -53,7 +63,7 @@ class PluginUploadFile{
       if($this->isExtension(array('png', 'jpg', 'gif'), $data->get('name'))){
         $element[] = wfDocument::createHtmlElement('img', null, array('src' => $fullname, 'class' => 'img-thumbnail', 'style' => $img_style));
       }else if($this->isExtension(array('pdf', 'yml', 'txt'), $data->get('name'))){
-        $element[] = wfDocument::createHtmlElement('a', $data->get('name'), array('onclick' => "window.open('$fullname')"));
+        $element[] = wfDocument::createHtmlElement('a', $display_name, array('onclick' => "window.open('$fullname')"));
       }
     }elseif($data->get('image_not_exist')){
       $element = $data->get('image_not_exist');
