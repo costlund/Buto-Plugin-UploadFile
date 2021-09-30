@@ -24,6 +24,8 @@ div:
             style: 'display:none'
         input_button:
           type: input
+          settings:
+            i18n: false
           attribute:
             type: button
             class: upload_button
@@ -36,6 +38,8 @@ div:
       innerHTML:
         a:
           type: a
+          settings:
+            i18n: false
           attribute:
             data_id: _
             onclick: "$('#'+this.getAttribute('data_id')+'_file').trigger('click'); "
@@ -60,6 +64,8 @@ div:
               innerHTML: 'Max file size:'
             -
               type: span
+              settings:
+                i18n: false
               attribute:
                 id: max_file_size
               innerHTML: _
@@ -71,6 +77,8 @@ div:
               innerHTML: 'Accept:'
             -
               type: span
+              settings:
+                i18n: false
               attribute:
                 id: accept
               innerHTML: _

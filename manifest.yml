@@ -1,5 +1,9 @@
-version: 1.4.0
+version: 1.4.1
 history:
+  1.4.1:
+    date: '2021-09-30'
+    title: I18N
+    description: 'I18N improvements.'
   1.4.0:
     date: '2021-03-04'
     title: 'Display name'
