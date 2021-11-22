@@ -52,7 +52,12 @@ class PluginUploadFile{
      */
     $fullname = wfSettings::replaceDir($data->get('dir').'/'.$data->get('name'));
     $element = array();
-    if(wfFilesystem::fileExist($fullname)){
+    if(!$data->get('app_dir')){
+      $exist = wfFilesystem::fileExist($fullname);
+    }else{
+      $exist = wfFilesystem::fileExist(wfGlobals::getAppDir().$fullname);
+    }
+    if($exist){
       /**
        * 
        */
@@ -96,7 +101,12 @@ class PluginUploadFile{
      * 
      */
     $fullname = wfSettings::replaceDir($data->get('dir').'/'.$data->get('name'));
-    if(wfFilesystem::fileExist($fullname)){
+    if(!$data->get('app_dir')){
+      $exist = wfFilesystem::fileExist($fullname);
+    }else{
+      $exist = wfFilesystem::fileExist(wfGlobals::getAppDir().$fullname);
+    }
+    if($exist){
       if($data->get('if_file_exist/element')){
         wfDocument::renderElement($data->get('if_file_exist/element'));
         return null;
@@ -163,7 +173,11 @@ class PluginUploadFile{
       $data->set('post/fileName', $fileName);
       $data->set('post/fileTmpLoc', $fileTmpLoc);
       $data->set('dir', wfSettings::replaceDir($data->get('dir')));
-      wfFilesystem::createDir(wfSettings::replaceDir($data->get('dir')));
+      $dir = wfSettings::replaceDir($data->get('dir'));
+      if($data->get('app_dir')){
+        $dir = wfGlobals::getAppDir().$dir;
+      }
+      wfFilesystem::createDir($dir);
       if($data->get('name')=='*'){
         $target_dir = $data->get('dir').'/'.$_FILES["file1"]["name"];
       }else{
@@ -234,6 +248,9 @@ class PluginUploadFile{
       /**
        * Copy from temp folder.
        */
+      if($data->get('app_dir')){
+        $target_dir = wfGlobals::getAppDir().$target_dir;
+      }
       if(move_uploaded_file($fileTmpLoc, $target_dir)){
         /**
          * Run method before save.
@@ -257,8 +274,17 @@ class PluginUploadFile{
        * Delete file.
        */
       $fullname = wfSettings::replaceDir($data->get('dir').'/'.$data->get('name'));
-      if(wfFilesystem::fileExist($fullname)){
-        wfFilesystem::delete($fullname);
+      if(!$data->get('app_dir')){
+        $exist = wfFilesystem::fileExist($fullname);
+      }else{
+        $exist = wfFilesystem::fileExist(wfGlobals::getAppDir().$fullname);
+      }
+      if($exist){
+        if(!$data->get('app_dir')){
+          wfFilesystem::delete($fullname);
+        }else{
+          wfFilesystem::delete(wfGlobals::getAppDir().$fullname);
+        }
       }
       if($data->get('success/script')){
         exit("...<script>".$data->get('success/script')."</script>");

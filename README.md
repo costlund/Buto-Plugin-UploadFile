@@ -1,7 +1,6 @@
 # Buto-Plugin-UploadFile
-Upload a file.
-
-
+Upload a file. 
+One could upload to buto_data folder (or other outside application folder). 
 
 ## Include Javascript
 
@@ -12,10 +11,7 @@ data:
   method: include
 ```
 
-
-
 ## Widgets
-
 View, delete and upload.
 ```
 type: widget
@@ -41,8 +37,6 @@ data:
   data: yml:/plugin/_folder_/_folder/data.yml
 ```
 
-
-
 ## Data
 ```
 id: _any_id_
@@ -63,17 +57,21 @@ success:
   script: "alert('Success on upload.');"
 ```
 
+### App dir
+Add param app_dir as an option to not specify root directory.
+```
+dir: '/../buto_data/theme/[theme]/_any_folder_'
+app_dir: true
+```
+
 ### Display name
 Add optional param to display instead of file name.
 ```
 display_name: Test file
 ```
 
-
 ## Usage
-
 Example of usage where image name has to be changed.
-
 Data file is upload_member_image.yml.
 
 ### Widget
@@ -90,9 +88,7 @@ innerHTML:
       method: element
       data: rs:upload_member_image
 ```
-
 Code
-
 ```
 $id = '_my_id_';
 
@@ -106,9 +102,7 @@ wfDocument::renderElement($element->get());
 ```
 
 ### Capture
-
 member_image_capture.yml
-
 ```
 type: widget
 data:
@@ -116,8 +110,6 @@ data:
   method: capture
   data: rs:upload_member_image
 ```
-
-
 
 ```
 $id = wfRequest::get('id');
@@ -133,6 +125,3 @@ $element = $this->element_get('member_image_capture');
 $element->setByTag(array('upload_member_image' => $upload_member_image->get()));
 wfDocument::renderElement($element->get());
 ```
-
-
-

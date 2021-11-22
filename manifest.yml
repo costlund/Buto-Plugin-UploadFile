@@ -1,5 +1,9 @@
-version: 1.4.1
+version: 1.5.0
 history:
+  1.5.0:
+    date: '2021-11-22'
+    title: App dir
+    description: 'Add param app_dir as an option to not has to specify root directory.'
   1.4.1:
     date: '2021-09-30'
     title: I18N
