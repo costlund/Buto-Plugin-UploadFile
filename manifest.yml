@@ -1,5 +1,9 @@
-version: 1.5.0
+version: 1.6.0
 history:
+  1.6.0:
+    date: '2022-05-23'
+    title: Method before
+    description: 'New param method/before.'
   1.5.0:
     date: '2021-11-22'
     title: App dir

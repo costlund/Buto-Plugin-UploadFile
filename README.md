@@ -56,6 +56,14 @@ image_not_exist:
 success:
   script: "alert('Success on upload.');"
 ```
+Method before
+```
+method:
+  before:
+    -
+      plugin: '_my_/_plugin_'
+      method: _my_method_
+```
 
 ### App dir
 Add param app_dir as an option to not specify root directory.

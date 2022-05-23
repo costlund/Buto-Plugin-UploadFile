@@ -6,6 +6,7 @@
  * Windows: Has to add account IUSR to temp folder with proper privileges.
  */
 class PluginUploadFile{
+  private $i18n = null;
   /**
    * 
    */
@@ -15,6 +16,12 @@ class PluginUploadFile{
       wfPlugin::includeonce('wf/yml');
     }
     wfPlugin::enable('i18n/file_to_object');
+    /**
+     * 
+     */
+    wfPlugin::includeonce('i18n/translate_v1');
+    $this->i18n = new PluginI18nTranslate_v1();
+    $this->i18n->path = '/plugin/upload/file/i18n';
   }
   /**
    * 
@@ -33,6 +40,10 @@ class PluginUploadFile{
   public function widget_view($data){
     $data = new PluginWfArray($data);
     $data = new PluginWfArray($data->get('data'));
+    /**
+     * Method before
+     */
+    $data = $this->handle_method_before($data);
     /**
      * 
      */
@@ -81,12 +92,28 @@ class PluginUploadFile{
   /**
    * 
    */
+  private function handle_method_before($data){
+    if($data->get('method/before')){
+      foreach ($data->get('method/before') as $key => $value) {
+        $i = new PluginWfArray($value);
+        $data = PluginUploadFile::runCaptureMethod($i->get('plugin'), $i->get('method'), $data);
+      }
+    }
+    return $data;
+  }
+  /**
+   * 
+   */
   public function widget_element($data){
     /**
      * 
      */
     $data = new PluginWfArray($data);
     $data = new PluginWfArray($data->get('data'));
+    /**
+     * Method before
+     */
+    $data = $this->handle_method_before($data);
     /**
      * Handle url.
      */
@@ -120,8 +147,8 @@ class PluginUploadFile{
        * Buttons.
        */
       $element2 = array();
-      $element2[] = wfDocument::createHtmlElement('button', 'Delete', array('onclick' => "PluginWfAjax.load('".$data->get('id')."_delete', '".$data->get('url')."');", 'id' => "".$data->get('id')."_delete", 'class' => 'btn btn-primary'));
-      $element2[] = wfDocument::createHtmlElement('button', 'View', array('onclick' => "window.open('$fullname')", 'class' => 'btn btn-success'));
+      $element2[] = wfDocument::createHtmlElement('button', $this->i18n->translateFromTheme('Delete'), array('onclick' => "PluginWfAjax.load('".$data->get('id')."_delete', '".$data->get('url')."');", 'id' => "".$data->get('id')."_delete", 'class' => 'btn btn-primary'));
+      $element2[] = wfDocument::createHtmlElement('button', $this->i18n->translateFromTheme('View'), array('onclick' => "window.open('$fullname')", 'class' => 'btn btn-success'));
       $element[] = wfDocument::createHtmlElement('p', $element2);
       /**
        * Display element.
@@ -164,6 +191,13 @@ class PluginUploadFile{
     $data = wfArray::get($data, 'data');
     if(!is_array($data)){ $data = wfSettings::getSettingsFromYmlString($data); }
     $data = new PluginWfArray($data);
+    /**
+     * 
+     */
+    $data = $this->handle_method_before($data);
+    /**
+     * 
+     */
     if(wfRequest::isPost()){
       /**
        * Uploading file.
