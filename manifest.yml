@@ -1,12 +1,16 @@
-version: 1.6.0
+version: 1.6.1
 history:
+  1.6.1:
+    date: '2022-06-07'
+    title: Versions
+    description: 'Versions update.'
   1.6.0:
     date: '2022-05-23'
-    title: Method before
+    title: 'Method before'
     description: 'New param method/before.'
   1.5.0:
     date: '2021-11-22'
-    title: App dir
+    title: 'App dir'
     description: 'Add param app_dir as an option to not has to specify root directory.'
   1.4.1:
     date: '2021-09-30'
@@ -39,10 +43,10 @@ history:
 plugin:
   -
     name: wf/array
-    version: 1.2.0
+    version: 1.2.3
   -
     name: wf/yml
-    version: 1.3.0
+    version: 1.4.0
   -
     name: include/js
     version: 1.2.0
