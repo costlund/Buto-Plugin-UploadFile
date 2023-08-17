@@ -117,8 +117,8 @@ class PluginUploadFile{
     /**
      * Handle url.
      */
-    if(!strstr($data->get('url'), '_time=')){
-      if(strstr($data->get('url'), '?')){
+    if(!wfPhpfunc::strstr($data->get('url'), '_time=')){
+      if(wfPhpfunc::strstr($data->get('url'), '?')){
         $data->set('url', $data->get('url').'&_time='.wfCrypt::getUid());
       }else{
         $data->set('url', $data->get('url').'?_time='.wfCrypt::getUid());
@@ -246,7 +246,7 @@ class PluginUploadFile{
        * Accept.
        */
       $accept = false;
-      if( strtolower(substr($fileName, (strlen($fileName)-strlen($data->get('accept'))-1)))  == strtolower('.'.$data->get('accept')) ){
+      if( strtolower(wfPhpfunc::substr($fileName, (wfPhpfunc::strlen($fileName)-strlen($data->get('accept'))-1)))  == strtolower('.'.$data->get('accept')) ){
         $accept = true;
       }
       /**
@@ -254,7 +254,7 @@ class PluginUploadFile{
        */
       if(!$accept && strtolower($data->get('accept'))=='jpg'){
         $data->set('accept', 'jpeg');
-        if( strtolower(substr($fileName, (strlen($fileName)-strlen($data->get('accept'))-1)))  == strtolower('.'.$data->get('accept')) ){
+        if( strtolower(wfPhpfunc::substr($fileName, (wfPhpfunc::strlen($fileName)-strlen($data->get('accept'))-1)))  == strtolower('.'.$data->get('accept')) ){
           $accept = true;
         }
       }
@@ -347,7 +347,7 @@ class PluginUploadFile{
    */
   private function isExtension($extension, $name){
     foreach ($extension as $key => $value) {
-      if(strtolower(substr($name, strlen($name) - strlen($value)-1)) == '.'.strtolower($value)){
+      if(strtolower(wfPhpfunc::substr($name, wfPhpfunc::strlen($name) - wfPhpfunc::strlen($value)-1)) == '.'.strtolower($value)){
         return true;
       }
     }
