@@ -40,13 +40,13 @@ data:
 ## Data
 ```
 id: _any_id_
-url: '/_page_where_capture_widget_is_'
+url: '/_page_where_capture_widget_is_/id/[id]'
 max_size: 5000000
 accept: jpg
 file_type: 'image/jpeg'
 dir: '[web_dir]/data/theme/[theme]/_any_folder_'
 web_dir: '/data/theme/[theme]/_any_folder_'
-name: test.jpg
+name: '[id].jpg'
 image:
   style: ''
 image_not_exist:
