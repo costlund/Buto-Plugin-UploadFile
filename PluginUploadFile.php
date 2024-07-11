@@ -41,6 +41,10 @@ class PluginUploadFile{
     $data = new PluginWfArray($data);
     $data = new PluginWfArray($data->get('data'));
     /**
+     * replace
+     */
+    $data->set('name', wfRequest::replaceString($data->get('name')));
+    /**
      * Method before
      */
     $data = $this->handle_method_before($data);
@@ -125,6 +129,11 @@ class PluginUploadFile{
       }
     }
     /**
+     * replace
+     */
+    $data->set('url', wfRequest::replaceString($data->get('url')));
+    $data->set('name', wfRequest::replaceString($data->get('name')));
+    /**
      * 
      */
     $fullname = wfSettings::replaceDir($data->get('dir').'/'.$data->get('name'));
@@ -191,6 +200,11 @@ class PluginUploadFile{
     $data = wfArray::get($data, 'data');
     if(!is_array($data)){ $data = wfSettings::getSettingsFromYmlString($data); }
     $data = new PluginWfArray($data);
+    /**
+     * replace
+     */
+    $data->set('url', wfRequest::replaceString($data->get('url')));
+    $data->set('name', wfRequest::replaceString($data->get('name')));
     /**
      * 
      */
