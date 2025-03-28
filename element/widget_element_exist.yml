@@ -1,0 +1,84 @@
+-
+  type: p
+  innerHTML:
+    -
+      type: button
+      innerHTML: 'Delete'
+      attribute:
+        data-id: rs:id
+        data-url: rs:url
+        onclick: "PluginWfAjax.load(this.getAttribute('data-id')+'_delete', this.getAttribute('data-url'));"
+        id: my_upload_form_memb_inc_logo_delete
+        class: 'btn btn-primary'
+    -
+      type: button
+      innerHTML: View
+      attribute:
+        data-fullname: rs:fullname
+        onclick: "window.open(this.getAttribute('data-fullname'))"
+        class: 'btn btn-success'
+-
+  type: p
+  settings:
+    enabled: rs:extension_image
+  innerHTML:
+    -
+      type: div
+      innerHTML:
+        - 
+          type: strong
+          attribute:
+            class: content-colon
+          innerHTML: Width
+        - 
+          type: span
+          innerHTML: rs:image/width
+    -
+      type: div
+      innerHTML:
+        - 
+          type: strong
+          attribute:
+            class: content-colon
+          innerHTML: Height
+        - 
+          type: span
+          innerHTML: rs:image/height
+    -
+      type: div
+      innerHTML:
+        - 
+          type: strong
+          attribute:
+            class: content-colon
+          innerHTML: MIME
+        - 
+          type: span
+          innerHTML: rs:image/mime
+    -
+      type: div
+      innerHTML:
+        - 
+          type: strong
+          attribute:
+            class: content-colon
+          innerHTML: Size
+        - 
+          type: span
+          innerHTML: rs:filesize
+    -
+      type: img
+      attribute:
+        src: rs:fullname
+        class: img-thumbnail
+-
+  type: p
+  settings:
+    disabled: rs:extension_image
+  innerHTML:
+    -
+      type: a
+      attribute: 
+        data-fullname: rs:fullname
+        onclick: window.open(this.getAttribute('data-fullname'))
+      innerHTML: rs:name

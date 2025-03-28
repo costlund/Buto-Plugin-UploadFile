@@ -108,6 +108,14 @@ class PluginUploadFile{
   /**
    * 
    */
+  private function getImageSize($file_from_root){
+    $temp = getimagesize($file_from_root);
+    $data = new PluginWfArray();
+    $data->set('width', $temp[0]);
+    $data->set('height', $temp[1]);
+    $data->set('mime', $temp['mime']);
+    return $data->get();
+  }
   public function widget_element($data){
     /**
      * 
@@ -151,28 +159,22 @@ class PluginUploadFile{
        * 
        */
       $fullname = wfSettings::replaceDir($data->get('web_dir')).'/'.$data->get('name').'?x='.wfCrypt::getUid();
-      $element = array();
-      /**
-       * Buttons.
-       */
-      $element2 = array();
-      $element2[] = wfDocument::createHtmlElement('button', $this->i18n->translateFromTheme('Delete'), array('onclick' => "PluginWfAjax.load('".$data->get('id')."_delete', '".$data->get('url')."');", 'id' => "".$data->get('id')."_delete", 'class' => 'btn btn-primary'));
-      $element2[] = wfDocument::createHtmlElement('button', $this->i18n->translateFromTheme('View'), array('onclick' => "window.open('$fullname')", 'class' => 'btn btn-success'));
-      $element[] = wfDocument::createHtmlElement('p', $element2);
-      /**
-       * Display element.
-       */
-      $element2 = array();
+      $data->set('fullname', $fullname);
+      $data->set('fullpath', wfGlobals::getAppDir().'/'.wfGlobals::get('web_folder'). wfSettings::replaceDir($data->get('web_dir')) .'/'.$data->get('name'));
+      $data->set('image', null);
       if($this->isExtension(array('png', 'jpg', 'gif'), $data->get('name'))){
-        $element2[] = wfDocument::createHtmlElement('img', null, array('src' => $fullname, 'class' => 'img-thumbnail', 'style' => 'width:100%'));
+        $data->set('extension_image', true);
+        $data->set('image', $this->getImageSize($data->get('fullpath')));
       }else if($this->isExtension(array('pdf', 'yml', 'txt'), $data->get('name'))){
-        $element2[] = wfDocument::createHtmlElement('a', $data->get('name'), array('onclick' => "window.open('$fullname')"));
+        $data->set('extension_image', false);
       }
-      $element[] = wfDocument::createHtmlElement('p', $element2);
+      $data->set('filesize', filesize($data->get('fullpath')));
       /**
-       * Render.
+       * element
        */
-      wfDocument::renderElement($element);
+      $temp = wfDocument::getElementFromFolder(__DIR__, __FUNCTION__.'_exist');
+      $temp->setByTag($data->get());
+      wfDocument::renderElement($temp);
     }else{
       /**
        * Handle _time param for ajax call to work.

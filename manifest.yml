@@ -1,5 +1,9 @@
-version: 1.8.0
+version: 1.8.1
 history:
+  1.8.1:
+    date: '2025-03-28'
+    title: Widget
+    description: 'Create widget_element from file.'
   1.8.0:
     date: '2024-07-11'
     title: Replace
