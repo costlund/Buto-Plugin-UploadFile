@@ -40,6 +40,7 @@ class PluginUploadFile{
   public function widget_view($data){
     $data = new PluginWfArray($data);
     $data = new PluginWfArray($data->get('data'));
+    $data = $this->handle_data($data);
     /**
      * replace
      */
