@@ -8,7 +8,7 @@
         data-id: rs:id
         data-url: rs:url
         onclick: "PluginWfAjax.load(this.getAttribute('data-id')+'_delete', this.getAttribute('data-url'));"
-        id: my_upload_form_memb_inc_logo_delete
+        id: rs:id_delete
         class: 'btn btn-primary'
     -
       type: button

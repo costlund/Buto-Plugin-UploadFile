@@ -116,12 +116,20 @@ class PluginUploadFile{
     $data->set('mime', $temp['mime']);
     return $data->get();
   }
+  private function handle_data($data){
+    $data->set('id_delete', $data->get('id').'_delete');
+    if(!$data->get('dir')){
+      $data->set('dir', '[web_dir]'.$data->get('web_dir'));
+    }
+    return $data;
+  }
   public function widget_element($data){
     /**
      * 
      */
     $data = new PluginWfArray($data);
     $data = new PluginWfArray($data->get('data'));
+    $data = $this->handle_data($data);
     /**
      * Method before
      */
@@ -202,6 +210,7 @@ class PluginUploadFile{
     $data = wfArray::get($data, 'data');
     if(!is_array($data)){ $data = wfSettings::getSettingsFromYmlString($data); }
     $data = new PluginWfArray($data);
+    $data = $this->handle_data($data);
     /**
      * replace
      */
