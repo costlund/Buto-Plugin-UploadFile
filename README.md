@@ -44,7 +44,7 @@ url: '/_page_where_capture_widget_is_/id/[id]'
 max_size: 5000000
 accept: jpg
 file_type: 'image/jpeg'
-dir: '[web_dir]/data/theme/[theme]/_any_folder_'
+dir: '[web_dir]/data/theme/[theme]/_any_folder_' (omit if web_dir is set)
 web_dir: '/data/theme/[theme]/_any_folder_'
 name: '[id].jpg'
 image:
