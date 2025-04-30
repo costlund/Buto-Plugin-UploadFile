@@ -1,0 +1,127 @@
+readme:
+  name: Buto-Plugin-UploadFile
+  description: |
+    - Upload a file. 
+    - One could upload to buto_data folder (or other outside application folder). 
+  item:
+    -
+      name: Settings
+    -
+      name: Usage
+      item:
+        -
+          name: Widget data
+          description: |
+
+            Data.
+            ```
+            id: _any_id_
+            url: '/_page_where_capture_widget_is_/id/[id]'
+            max_size: 5000000
+            accept: jpg
+            file_type: 'image/jpeg'
+            dir: '[web_dir]/data/theme/[theme]/_any_folder_' (omit if web_dir is set)
+            web_dir: '/data/theme/[theme]/_any_folder_'
+            name: '[id].jpg'
+            display_name: '(Optional: Open file)'
+            image:
+              style: ''
+            image_not_exist:
+              -
+                type: span
+                innerHTML: Upload
+            success:
+              script: "alert('Success on upload.');"
+            ```
+            Method before.
+            ```
+            method:
+              before:
+                -
+                  plugin: '_my_/_plugin_'
+                  method: my_method_before
+            ```
+            Example of method before.
+            ```
+            public function my_method_before($data){
+              $data->set('display_name', 'My custom display name');
+              return $data;
+            }
+            ```
+            Add param app_dir as an option to not specify root directory.
+            ```
+            dir: '/../buto_data/theme/[theme]/_any_folder_'
+            app_dir: true
+            ```
+    -
+      name: Pages
+      item: {  }
+    -
+      name: Widgets
+      item:
+        -
+          name: widget_capture
+          description: |
+            Capture file.
+            ```
+            type: widget
+            data:
+              plugin: 'upload/file'
+              method: capture
+              data: yml:/plugin/_folder_/_folder/data.yml
+            ```
+        -
+          name: widget_element
+          description: |
+            View, delete and upload.
+            ````
+            type: widget
+            data:
+              plugin: 'upload/file'
+              method: element
+              data: yml:/plugin/_folder_/_folder/data.yml
+            ````
+        -
+          name: widget_include
+          description: |
+            Include in page head.
+            ```
+            type: widget
+            data:
+              plugin: 'upload/file'
+              method: include
+            ```
+        -
+          name: widget_view
+          description: |
+            View.
+            ```
+            type: widget
+            data:
+              plugin: 'upload/file'
+              method: view
+              data: yml:/plugin/_folder_/_folder/data.yml
+            ```
+    -
+      name: Event
+      item: {  }
+    -
+      name: Construct
+      item:
+        -
+          name: __construct
+    -
+      name: Methods
+      item:
+        -
+          name: handle_method_before
+        -
+          name: getImageSize
+        -
+          name: handle_data
+        -
+          name: runCaptureMethod
+        -
+          name: getYml
+        -
+          name: isExtension

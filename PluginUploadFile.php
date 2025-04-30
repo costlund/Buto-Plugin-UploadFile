@@ -52,13 +52,6 @@ class PluginUploadFile{
     /**
      * 
      */
-    $display_name = $data->get('name');
-    if($data->get('display_name')){
-      $display_name = $data->get('display_name');
-    }
-    /**
-     * 
-     */
     $img_style = 'width:100%';
     if($data->get('img/style')){
       $img_style = $data->get('img/style');
@@ -84,7 +77,7 @@ class PluginUploadFile{
       if($this->isExtension(array('png', 'jpg', 'gif'), $data->get('name'))){
         $element[] = wfDocument::createHtmlElement('img', null, array('src' => $fullname, 'class' => 'img-thumbnail', 'style' => $img_style));
       }else if($this->isExtension(array('pdf', 'yml', 'txt'), $data->get('name'))){
-        $element[] = wfDocument::createHtmlElement('a', $display_name, array('onclick' => "window.open('$fullname')"));
+        $element[] = wfDocument::createHtmlElement('a', $data->get('display_name'), array('onclick' => "window.open('$fullname')"));
       }
     }elseif($data->get('image_not_exist')){
       $element = $data->get('image_not_exist');
@@ -121,6 +114,9 @@ class PluginUploadFile{
     $data->set('id_delete', $data->get('id').'_delete');
     if(!$data->get('dir')){
       $data->set('dir', '[web_dir]'.$data->get('web_dir'));
+    }
+    if(!$data->get('display_name')){
+      $data->set('display_name', 'Open file');
     }
     return $data;
   }

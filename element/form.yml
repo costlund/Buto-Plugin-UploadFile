@@ -7,6 +7,7 @@ div:
   type: div
   attribute:
     id: _
+    class: alert alert-info
   innerHTML:
     form:
       type: form
