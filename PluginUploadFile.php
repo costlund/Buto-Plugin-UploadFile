@@ -315,6 +315,10 @@ class PluginUploadFile{
           $data = PluginUploadFile::runCaptureMethod($data->get('success/after_save/plugin'), $data->get('success/after_save/method'), $data);
         }
         /**
+         * log
+         */
+        $this->log($data, $fileName, 'save');
+        /**
          * 
          */
         $array = array();
@@ -342,10 +346,29 @@ class PluginUploadFile{
           wfFilesystem::delete(wfGlobals::getAppDir().$fullname);
         }
       }
+      /**
+       * log
+       */
+      $this->log($data, $data->get('name'), 'delete');
+      /**
+       * 
+       */
       if($data->get('success/script')){
         exit("...<script>".$data->get('success/script')."</script>");
       }
     }
+  }
+  private function log($data, $fileName, $type){
+    if($data->get('log')){
+      $date = date('ymd');
+      $log = new PluginWfYml($data->get('dir')."/log.yml");
+      $log->set('last', array('date' => date('Y-m-d H:i:s'), 'fileName' => $fileName, 'type' => $type));
+      $log->save();
+      $log = new PluginWfYml($data->get('dir')."/log_$date.yml");
+      $log->set('log/', array('date' => date('Y-m-d H:i:s'), 'fileName' => $fileName, 'type' => $type));
+      $log->save();
+    }
+    return null;
   }
   /**
    * Capture method caller.

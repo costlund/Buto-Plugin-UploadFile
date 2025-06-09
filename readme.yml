@@ -53,6 +53,10 @@ readme:
             dir: '/../buto_data/theme/[theme]/_any_folder_'
             app_dir: true
             ```
+            Log to file in dir.
+            ```
+            log: true
+            ```
     -
       name: Pages
       item: {  }

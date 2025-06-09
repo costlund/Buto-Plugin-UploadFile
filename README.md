@@ -53,6 +53,8 @@ success:
 <p>Add param app_dir as an option to not specify root directory.</p>
 <pre><code>dir: '/../buto_data/theme/[theme]/_any_folder_'
 app_dir: true</code></pre>
+<p>Log to file in dir.</p>
+<pre><code>log: true</code></pre>
 
 <a name="key_2"></a>
 

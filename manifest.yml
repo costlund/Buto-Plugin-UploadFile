@@ -1,5 +1,9 @@
-version: 1.8.3
+version: 1.8.4
 history:
+  1.8.4:
+    date: '2025-05-09'
+    title: Log
+    description: 'Add log method.'
   1.8.3:
     date: '2025-04-30'
     title: Layout
